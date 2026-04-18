@@ -105,6 +105,11 @@ document.addEventListener("DOMContentLoaded", () => {
       "todo.relaxTitle": "Just Relax",
       "todo.relaxText": "Slow down, enjoy the vibe, coffee, and time with friends and family.",
 
+            "gameCta.kicker": "Mini game",
+      "gameCta.title": "Want to win a prize?",
+      "gameCta.text": "Pack your suitcase, survive the road to the airport and arrive in Rimini. The best travellers win a dance with the newlyweds.",
+      "gameCta.button": "Play the game",
+
       "rsvp.kicker": "RSVP",
       "rsvp.title": "We can’t wait to celebrate with you",
       "rsvp.text": "Please let us know if you’ll be joining us on our special day.",
@@ -130,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "faq.a8": "Information will be shared closer to the wedding.",
 
       "footer.text": "Zuzka & Valerio · 19 September 2026",
-      "footer.contact": "Questions? <a href=\"mailto:your@email.com\">your@email.com</a>",
+      "footer.contact": "Questions? <a href=\"mailto:kakascikovapetra285@gmail.com\">kakascikovapetra285@gmail.com</a>",
 
       "game.kicker": "Interactive Wedding Journey",
       "game.title": "Journey to Rimini",
@@ -188,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "travel.airportText": "Najbližšie letiská:",
       "travel.accommodationTitle": "Ubytovanie",
       "travel.accommodationText1": "Odporúčame ubytovanie blízko centra mesta alebo v blízkosti miesta konania.",
-      "travel.accommodationText2": "Sem je možné neskôr doplniť tipy na hotely a rezervačné odkazy.",
+      "travel.accommodationText2": "Treba tu dolpnit info guyssss",
       "travel.weatherTitle": "Očakávané počasie",
       "travel.weatherIntro": "Môžete očakávať teplé neskoro-letné dni, veľa slnka a príjemné večery.",
       "travel.weatherDay1": "Polooblačno",
@@ -205,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "party.maidOfHonor": "Svedkyňa",
       "party.bestMan": "Svedok",
       "party.groupTitle": "Družičky a družbovia",
-      "party.groupText": "Sem doplňte mená",
+      "party.groupText": "Petka, Mimka",
 
       "todo.title": "Tipy v okolí",
       "todo.intro": "Rimini sme si vybrali nielen kvôli svadbe, ale aj kvôli jeho atmosfére. Tu je niekoľko miest a zážitkov, ktoré by sa vám mohli páčiť.",
@@ -221,6 +226,11 @@ document.addEventListener("DOMContentLoaded", () => {
       "todo.sanmarinoText": "Krátky výlet do San Marina ponúka krásne výhľady a jedinečnú atmosféru.",
       "todo.relaxTitle": "Oddych",
       "todo.relaxText": "Spomaľte, užite si atmosféru, kávu a čas s blízkymi.",
+
+            "gameCta.kicker": "Mini hra",
+      "gameCta.title": "Chceš vyhrať cenu?",
+      "gameCta.text": "Zbaľ kufor, preži cestu na letisko a doraz do Rimini. Najlepší cestujúci vyhrajú tanec s novomanželmi.",
+      "gameCta.button": "Zahrať si hru",
 
       "rsvp.kicker": "RSVP",
       "rsvp.title": "Tešíme sa na vás",
@@ -247,7 +257,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "faq.a8": "Informácie budú zdieľané bližšie k termínu svadby.",
 
       "footer.text": "Zuzka & Valerio · 19. september 2026",
-      "footer.contact": "Otázky? <a href=\"mailto:your@email.com\">your@email.com</a>",
+      "footer.contact": "Otázky? <a href=\"mailto:kakascikovapetra285@gmail.com\">kakascikovapetra285@gmail.com</a>",
 
       "game.kicker": "Interaktívna svadobná cesta",
       "game.title": "Cesta do Rimini",
@@ -339,6 +349,11 @@ document.addEventListener("DOMContentLoaded", () => {
       "todo.relaxTitle": "Relax",
       "todo.relaxText": "Rilassatevi, godetevi l’atmosfera, un caffè e il tempo con amici e famiglia.",
 
+            "gameCta.kicker": "Mini gioco",
+      "gameCta.title": "Vuoi vincere un premio?",
+      "gameCta.text": "Prepara la valigia, sopravvivi alla strada per l'aeroporto e arriva a Rimini. I migliori viaggiatori vincono un ballo con gli sposi.",
+      "gameCta.button": "Gioca",
+
       "rsvp.kicker": "RSVP",
       "rsvp.title": "Non vediamo l’ora di festeggiare con voi",
       "rsvp.text": "Fateci sapere se partecipate.",
@@ -363,7 +378,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "faq.a8": "Le informazioni saranno condivise più vicino alla data del matrimonio.",
 
       "footer.text": "Zuzka & Valerio · 19 settembre 2026",
-      "footer.contact": "Domande? <a href=\"mailto:your@email.com\">your@email.com</a>",
+      "footer.contact": "Domande? <a href=\"mailto:kakascikovapetra285@gmail.com\">kakascikovapetra285@gmail.com</a>",
 
       "game.kicker": "Viaggio interattivo di nozze",
       "game.title": "Viaggio a Rimini",

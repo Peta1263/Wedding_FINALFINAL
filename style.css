@@ -1,5 +1,6 @@
 :root {
-  --bg: #f7f5f2;
+  --bg:#f4f2ed;
+  /*--bg: #f7f5f2;*/
   --card: #fdfcf9;
   --text: #2f2f2f;
   --muted: #6f746f;
@@ -164,55 +165,7 @@ a {
   opacity: 0;
 }
 
-.sparkles {
-  position: fixed;
-  inset: 0;
-  z-index: 4;
-  pointer-events: none;
-}
 
-.spark {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255, 248, 240, 0.95);
-  box-shadow:
-    0 0 10px rgba(255, 255, 255, 0.95),
-    0 0 18px rgba(255, 244, 232, 0.75);
-  opacity: 0;
-  transform: scale(0.6);
-}
-
-.opening .spark {
-  animation: sparkleFloat 1.8s ease forwards;
-}
-
-.s1 { top: 24%; left: 34%; animation-delay: 0.05s; }
-.s2 { top: 30%; left: 62%; animation-delay: 0.18s; }
-.s3 { top: 42%; left: 28%; animation-delay: 0.3s; }
-.s4 { top: 46%; left: 70%; animation-delay: 0.42s; }
-.s5 { top: 58%; left: 40%; animation-delay: 0.56s; }
-.s6 { top: 63%; left: 58%; animation-delay: 0.7s; }
-
-@keyframes sparkleFloat {
-  0% {
-    opacity: 0;
-    transform: translateY(10px) scale(0.4);
-  }
-  20% {
-    opacity: 0.95;
-    transform: translateY(0) scale(1);
-  }
-  60% {
-    opacity: 0.75;
-    transform: translateY(-14px) scale(0.9);
-  }
-  100% {
-    opacity: 0;
-    transform: translateY(-28px) scale(0.4);
-  }
-}
 
 .intro-overlay {
   position: fixed;
@@ -306,6 +259,7 @@ a {
   position: fixed;
   top: 22px;
   right: 26px;
+  transform: translate(-40px);
   z-index: 7;
   display: flex;
   gap: 0.45rem;
@@ -586,7 +540,67 @@ a {
   background: rgba(252, 251, 250, 0.92);
   backdrop-filter: blur(8px);
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  overflow: visible;
 }
+
+
+
+.nav-flowers {
+  position: absolute;
+  top: 0;
+  width: 500px;
+  height: 820px;
+  pointer-events: none;
+  z-index: 100;
+}
+
+.nav-flowers-left {
+  left: -100px;
+  top: -5px;
+}
+
+.nav-flowers-right {
+  right: -170px;
+  top: -5px;
+}
+
+.flower-left img,
+.flower-right img {
+  filter: drop-shadow(0 20px 40px rgba(0,0,0,0.08));
+}
+
+.nav-flower-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top center;
+  display: block;
+  filter: drop-shadow(2px 6px 14px rgba(0,0,0,0.15));
+}
+
+/* medium desktop */
+@media (max-width: 1100px) {
+  .nav-flowers {
+    width: 290px;
+    height: 500px;
+  }
+
+  .nav-flowers-left {
+    left: -6px;
+  }
+
+  .nav-flowers-right {
+    right: -6px;
+  }
+}
+
+/* hide on mobile */
+@media (max-width: 900px) {
+  .nav-flowers {
+    display: none;
+  }
+}
+
 
 .nav-wrap {
   display: flex;
@@ -693,7 +707,9 @@ a {
   border-radius: var(--radius);
   box-shadow: var(--shadow);
   padding: 4.5rem 2rem;
+  max-width: 980px;
   text-align: center;
+  margin: 0 auto;
 }
 
 .eyebrow {
@@ -895,8 +911,48 @@ a {
 }
 
 /* =========================
-   TRAVEL
+   GAME CTA SECTION
 ========================= */
+
+.game-cta-section {
+  text-align: center;
+}
+
+.game-cta-card {
+  max-width: 640px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.game-cta-kicker {
+  margin: 0;
+  font-size: 0.95rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.game-cta-title {
+  margin: 0;
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-size: clamp(2.8rem, 6vw, 4.2rem);
+  color: var(--text);
+  line-height: 1.1;
+}
+
+.game-cta-text {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 520px;
+}
+
+
 
 .travel-intro {
   max-width: 720px;

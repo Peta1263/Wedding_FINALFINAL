@@ -87,10 +87,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 downloadPrize: "Stiahnuť odmenu",
                 next: "Ďalej",
                 continue: "Pokračovať",
-                start: "Štart"
+                start: "Štart",
+                up: "Hore",
+                down: "Dole",
+                roadHint: "Použi tlačidlá alebo ťahaj prstom po plátne",
+                roadHelp: "Použi tlačidlá hore/dole a vyhni sa zápchám na ceste na letisko."
             },
             form: {
-                guestNamePlaceholder: "Zadaj svoje meno"
+                guestNamePlaceholder: "Zadaj svoje meno",
+                countryLabel: "Tvoja krajina",
+                introText: "Pred odchodom na svadbu si musíš zbaliť kufor."
             },
             alerts: {
                 enterName: "Najprv zadaj svoje meno.",
@@ -147,10 +153,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 downloadPrize: "Download reward",
                 next: "Next",
                 continue: "Continue",
-                start: "Start"
+                start: "Start",
+                up: "Up",
+                down: "Down",
+                roadHint: "Use the buttons or swipe on the canvas",
+                roadHelp: "Use the up/down buttons to change lanes and avoid traffic on the way to the airport."
             },
             form: {
-                guestNamePlaceholder: "Enter your name"
+                guestNamePlaceholder: "Enter your name",
+                countryLabel: "Your country",
+                introText: "Before leaving for the wedding, you need to pack your suitcase."
             },
             alerts: {
                 enterName: "Enter your name first.",
@@ -207,10 +219,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 downloadPrize: "Scarica il premio",
                 next: "Avanti",
                 continue: "Continua",
-                start: "Start"
+                start: "Inizia",
+                up: "Su",
+                down: "Giù",
+                roadHint: "Usa i pulsanti o scorri sul canvas",
+                roadHelp: "Usa i pulsanti su/giù per cambiare corsia ed evitare il traffico."
             },
             form: {
-                guestNamePlaceholder: "Inserisci il tuo nome"
+                guestNamePlaceholder: "Inserisci il tuo nome",
+                countryLabel: "Il tuo paese",
+                introText: "Prima di partire per il matrimonio, devi preparare la valigia."
             },
             alerts: {
                 enterName: "Inserisci prima il tuo nome.",
@@ -797,6 +815,11 @@ document.addEventListener("DOMContentLoaded", () => {
         showScreen(finalScreen);
         setStep(3);
         finalPersonalText.textContent = TEXTS[currentLang].story.welcome(playerName);
+        // Set background image for final scene
+        const finalScene = document.querySelector(".final-scene");
+        if (finalScene) {
+            finalScene.style.backgroundImage = `url('${SCENES.couple}')`;
+        }
     }
 
     function downloadPrize() {
@@ -907,6 +930,26 @@ document.addEventListener("DOMContentLoaded", () => {
         if (guestNameInput) {
             guestNameInput.placeholder = t("form", "guestNamePlaceholder");
         }
+
+        // Update country label
+        const countryLabel = document.querySelector('label[for="guestCountry"]');
+        if (countryLabel) countryLabel.textContent = t("form", "countryLabel");
+
+        // Update intro text
+        const introTextEl = document.querySelector('.game-intro-card .game-text');
+        if (introTextEl) introTextEl.textContent = t("form", "introText");
+
+        // Update road buttons
+        const roadUpLabel = document.querySelector('#roadUpBtn .road-btn-label');
+        const roadDownLabel = document.querySelector('#roadDownBtn .road-btn-label');
+        if (roadUpLabel) roadUpLabel.textContent = t("buttons", "up");
+        if (roadDownLabel) roadDownLabel.textContent = t("buttons", "down");
+
+        // Update road hint and help text
+        const roadHintEl = document.querySelector('.road-swipe-hint');
+        if (roadHintEl) roadHintEl.textContent = t("buttons", "roadHint");
+        const roadHelpEl = document.querySelector('#roadScreen .game-text.center');
+        if (roadHelpEl) roadHelpEl.textContent = t("buttons", "roadHelp");
 
         if (storyScreen && !storyScreen.classList.contains("hidden") && currentStorySlides.length) {
             renderStorySlide();
