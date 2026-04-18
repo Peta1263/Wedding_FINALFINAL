@@ -200,9 +200,9 @@ a {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   text-align: center;
-  padding: 26px 0 12px;
+  padding: 40px 0 20px;
 }
 
 .intro-top {
@@ -210,7 +210,8 @@ a {
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  margin-bottom: 12px;
+  margin-top: 35px;
+  margin-bottom: -10px;
   transition:
     opacity 1.2s ease,
     transform 1.4s ease,
@@ -228,9 +229,9 @@ a {
 }
 
 .intro-title {
-  margin: 6px 0 0;
+  margin: 10px 0 0;
   font-family: "Great Vibes", cursive;
-  font-size: clamp(4.2rem, 8vw, 7.4rem);
+  font-size: clamp(5.2rem, 10vw, 9rem);
   font-weight: 400;
   line-height: 0.9;
   color: #2c2b2b;
@@ -238,8 +239,10 @@ a {
 }
 
 .intro-bottom {
-  margin-top: 8px;
-  padding-bottom: 10px;
+  margin-top: 15px;
+  padding-bottom: 0;
+  position: relative;
+  z-index: 8;
   transition:
     opacity 1.2s ease,
     transform 1.4s ease,
@@ -258,8 +261,8 @@ a {
 .intro-lang-switch {
   position: fixed;
   top: 22px;
-  right: 26px;
-  transform: translate(-40px);
+  right: 90px;
+  transform: none;
   z-index: 7;
   display: flex;
   gap: 0.45rem;
@@ -320,9 +323,9 @@ a {
 
 .envelope-stage {
   position: relative;
-  width: min(92vw, 920px);
-  height: min(64vh, 580px);
-  margin: 6px auto 0;
+  width: min(96vw, 1100px);
+  height: min(72vh, 760px);
+  margin: -75px auto 0;
   user-select: none;
   -webkit-user-select: none;
   transition: width 0s, height 0s;
@@ -349,13 +352,13 @@ a {
 /* closed and open envelope now stay exactly same size and angle */
 .env-closed {
   opacity: 1;
-  transform: scale(1) translateY(0) rotate(0deg);
+  transform: scale(1.14) translateY(0) ;
   z-index: 3;
 }
 
 .env-open {
   opacity: 0;
-  transform: scale(1) translateY(0) rotate(0deg);
+  transform: scale(1.14) translateY(18px);
   z-index: 2;
 }
 
@@ -409,13 +412,13 @@ a {
 
 .opening .env-closed {
   opacity: 0;
-  transform: scale(1) translateY(0) rotate(0deg);
+  transform: scale(1.14) translateY(0);
   filter: drop-shadow(0 26px 34px rgba(120, 101, 84, 0.08));
 }
 
 .opening .env-open {
   opacity: 1;
-  transform: scale(1) translateY(0) rotate(0deg);
+  transform: scale(1.14) translateY(18px);
   filter: drop-shadow(0 26px 34px rgba(120, 101, 84, 0.08));
 }
 
