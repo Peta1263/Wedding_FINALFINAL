@@ -130,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "faq.a8": "Information will be shared closer to the wedding.",
 
       "footer.text": "Zuzka & Valerio · 19 September 2026",
+      "footer.contact": "Questions? <a href=\"mailto:your@email.com\">your@email.com</a>",
 
       "game.kicker": "Interactive Wedding Journey",
       "game.title": "Journey to Rimini",
@@ -246,6 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "faq.a8": "Informácie budú zdieľané bližšie k termínu svadby.",
 
       "footer.text": "Zuzka & Valerio · 19. september 2026",
+      "footer.contact": "Otázky? <a href=\"mailto:your@email.com\">your@email.com</a>",
 
       "game.kicker": "Interaktívna svadobná cesta",
       "game.title": "Cesta do Rimini",
@@ -361,6 +363,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "faq.a8": "Le informazioni saranno condivise più vicino alla data del matrimonio.",
 
       "footer.text": "Zuzka & Valerio · 19 settembre 2026",
+      "footer.contact": "Domande? <a href=\"mailto:your@email.com\">your@email.com</a>",
 
       "game.kicker": "Viaggio interattivo di nozze",
       "game.title": "Viaggio a Rimini",

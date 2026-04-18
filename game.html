@@ -143,11 +143,17 @@
                     </div>
 
                     <div class="mobile-road-controls">
-                        <button id="roadUpBtn" type="button" aria-label="Up">↑</button>
-                        <button id="roadDownBtn" type="button" aria-label="Down">↓</button>
+                        <button id="roadUpBtn" type="button" aria-label="Up">
+                            <span class="road-btn-arrow">↑</span>
+                            <span class="road-btn-label">Hore</span>
+                        </button>
+                        <button id="roadDownBtn" type="button" aria-label="Down">
+                            <span class="road-btn-arrow">↓</span>
+                            <span class="road-btn-label">Dole</span>
+                        </button>
                     </div>
 
-                    <p class="road-swipe-hint">Ťahaj prstom hore / dole na plátne alebo použi tlačidlá</p>
+                    <p class="road-swipe-hint">Použi tlačidlá alebo ťahaj prstom po plátne</p>
 
                     <p class="game-text center" data-i18n="game.roadHelp">
                         Use ↑ and ↓ to change lanes and avoid delays on the way to the airport.
@@ -182,6 +188,7 @@
                 <!-- Final -->
                 <div class="game-panel hidden" id="finalScreen">
                     <div class="final-scene">
+                        <img src="images/couple.png" alt="" class="final-scene-img" id="finalSceneImg" />
                         <div class="final-overlay">
                             <p class="game-kicker">Rimini</p>
                             <h2 class="final-title" data-i18n="game.finalTitle">You made it</h2>
