@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Invitation</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="intro-page-body">
+  <div class="intro-lang-switch">
+    <button type="button" class="active" data-lang="en">EN</button>
+    <button type="button" data-lang="sk">SK</button>
+    <button type="button" data-lang="it">IT</button>
+  </div>
+  <iframe
+    class="home-preview"
+    id="homePreview"
+    src="home.html"
+    title="Wedding website"
+  ></iframe>
+
+
+  <div class="intro-overlay" id="introOverlay">
+    <main class="intro-wrap">
+      <div class="intro-top">
+        <p class="intro-kicker" id="introKicker">You have mail from</p>
+        <h1 class="intro-title" id="introTitle">Zuzka &amp; Valerio</h1>
+      </div>
+
+      <button
+        class="envelope-trigger"
+        id="openEnvelope"
+        type="button"
+        aria-label="Open invitation"
+      >
+        <div class="envelope-stage">
+          <img
+            src="images/envelope-close.png"
+            alt=""
+            class="env-img env-closed"
+            id="envClosed"
+          />
+
+          <img
+            src="images/envelope-open.png"
+            alt=""
+            class="env-img env-open"
+            id="envOpen"
+          />
+
+          <div class="env-letter" id="envLetter">
+            <div class="env-letter-inner">
+              <p class="env-letter-small">Wedding Invitation</p>
+              <h2>Zuzka &amp; Valerio</h2>
+              <p>19 September 2026</p>
+              <p>Rimini, Italy</p>
+            </div>
+          </div>
+
+          
+        </div>
+      </button>
+
+      <div class="intro-bottom">
+        <p class="intro-hint" id="introHint">Click the envelope to open</p>
+      </div>
+    </main>
+  </div>
+  
+
+  <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const trigger = document.getElementById("openEnvelope");
+        const body = document.body;
+        const homePreview = document.getElementById("homePreview");
+
+        const langButtons = document.querySelectorAll(".intro-lang-switch button");
+        const introKicker = document.getElementById("introKicker");
+        const introHint = document.getElementById("introHint");
+
+        const introTranslations = {
+          en: {
+            kicker: "You have mail from",
+            hint: "Click the envelope to open"
+          },
+          sk: {
+            kicker: "Máte poštu od",
+            hint: "Kliknite na obálku pre otvorenie"
+          },
+          it: {
+            kicker: "Hai posta da",
+            hint: "Clicca sulla busta per aprirla"
+          }
+        };
+
+        let opened = false;
+        let homeLoaded = false;
+
+        function setIntroLanguage(lang) {
+          const t = introTranslations[lang];
+          if (!t) return;
+
+          introKicker.textContent = t.kicker;
+          introHint.textContent = t.hint;
+
+          langButtons.forEach((btn) => {
+            btn.classList.toggle("active", btn.dataset.lang === lang);
+          });
+        }
+
+        langButtons.forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const lang = btn.dataset.lang;
+            setIntroLanguage(lang);
+          });
+        });
+
+        setIntroLanguage("en");
+
+        if (homePreview) {
+          homePreview.addEventListener("load", () => {
+            homeLoaded = true;
+            body.classList.add("home-loaded");
+          });
+        } else {
+          homeLoaded = true;
+          body.classList.add("home-loaded");
+        }
+
+        if (!trigger) return;
+
+        trigger.addEventListener("click", () => {
+          if (opened || !homeLoaded) return;
+          opened = true;
+
+          body.classList.add("opening");
+
+          setTimeout(() => {
+            body.classList.add("opened");
+          }, 1700);
+        });
+      });
+    </script>
+</body>
+</html>

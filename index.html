@@ -3,150 +3,316 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Invitation</title>
-
+  <title>Zuzka & Valerio</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap"
-    rel="stylesheet"
-  />
-  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Great+Vibes&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --text: #2f2f2f;
+      --muted: #6f746f;
+      --accent: #7f9788;
+      --line: #d8d5cf;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      min-height: 100vh;
+      background: var(--bg);
+      font-family: "Cormorant Garamond", serif;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .wrap {
+      width: 100%;
+      max-width: 440px;
+      text-align: center;
+    }
+
+    .kicker {
+      font-size: 0.85rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .names {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(3rem, 10vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.1;
+      margin-bottom: 8px;
+    }
+
+    .date {
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      margin-bottom: 36px;
+    }
+
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--line);
+      margin: 0 auto 36px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 36px 32px;
+      box-shadow: 0 2px 24px rgba(0,0,0,0.06);
+    }
+
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .card-text {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .input-wrap {
+      position: relative;
+      margin-bottom: 16px;
+    }
+
+    input[type="password"] {
+      width: 100%;
+      padding: 14px 48px 14px 18px;
+      border: 1.5px solid var(--line);
+      border-radius: 12px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.2rem;
+      background: var(--bg);
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+      letter-spacing: 0.15em;
+    }
+
+    input[type="password"]:focus {
+      border-color: var(--accent);
+    }
+
+    .toggle-eye {
+      position: absolute;
+      right: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--muted);
+      font-size: 1.1rem;
+      padding: 4px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.08em;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover { opacity: 0.88; }
+
+    .error {
+      margin-top: 14px;
+      font-size: 0.95rem;
+      color: #b07070;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .error.visible { opacity: 1; }
+
+    .footer-note {
+      margin-top: 28px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .lang-switch {
+      position: fixed;
+      top: 20px;
+      right: 24px;
+      display: flex;
+      gap: 6px;
+    }
+
+    .lang-switch button {
+        /*
+      background: none;
+      border: 1.5px solid var(--line);
+      border-radius: 20px;
+      padding: 4px 12px;
+      font-family: "Cormorant Garamond", serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;*/
+      border: 1px solid rgba(216, 213, 207, 0.95);
+        background: rgba(253, 252, 249, 0.78);
+        backdrop-filter: blur(6px);
+        padding: 0.4rem 0.7rem;
+        font-family: inherit;
+        font-size: 0.9rem;
+        color: var(--text);
+        cursor: pointer;
+        border-radius: 999px;
+        transition:
+            background 0.2s ease,
+            color 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.2s ease;
+    }
+
+    .lang-switch button.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+    }
+  </style>
 </head>
-<body class="intro-page-body">
-  <div class="intro-lang-switch">
-    <button type="button" class="active" data-lang="en">EN</button>
+<body>
+  
+  <div class="lang-switch">
+    <button type="button" data-lang="en" class="active">EN</button>
     <button type="button" data-lang="sk">SK</button>
     <button type="button" data-lang="it">IT</button>
   </div>
-  <iframe
-    class="home-preview"
-    id="homePreview"
-    src="home.html"
-    title="Wedding website"
-  ></iframe>
+  <div class="wrap">
+    <p class="kicker">You are invited</p>
+    <h1 class="names">Zuzka &amp; Valerio</h1>
+    <p class="date">19 · IX · 2026 &nbsp;·&nbsp; Rimini</p>
+    <div class="divider"></div>
 
+    <div class="card">
+      <h2 class="card-title">Welcome</h2>
+      <p class="card-text">This page is private.<br>Please enter the password from your invitation.</p>
 
-  <div class="intro-overlay" id="introOverlay">
-    <main class="intro-wrap">
-      <div class="intro-top">
-        <p class="intro-kicker" id="introKicker">You have mail from</p>
-        <h1 class="intro-title" id="introTitle">Zuzka &amp; Valerio</h1>
+      <div class="input-wrap">
+        <input type="password" id="pwInput" placeholder="Password" autocomplete="off" />
+        <button class="toggle-eye" id="toggleEye" type="button" aria-label="Show password">👁</button>
       </div>
 
-      <button
-        class="envelope-trigger"
-        id="openEnvelope"
-        type="button"
-        aria-label="Open invitation"
-      >
-        <div class="envelope-stage">
-          <img
-            src="images/envelope-close.png"
-            alt=""
-            class="env-img env-closed"
-            id="envClosed"
-          />
+      <button class="btn" id="enterBtn" type="button">Enter</button>
+      <p class="error" id="errorMsg">Incorrect password. Please try again.</p>
+    </div>
 
-          <img
-            src="images/envelope-open.png"
-            alt=""
-            class="env-img env-open"
-            id="envOpen"
-          />
-
-          <div class="env-letter" id="envLetter">
-            <div class="env-letter-inner">
-              <p class="env-letter-small">Wedding Invitation</p>
-              <h2>Zuzka &amp; Valerio</h2>
-              <p>19 September 2026</p>
-              <p>Rimini, Italy</p>
-            </div>
-          </div>
-
-          
-        </div>
-      </button>
-
-      <div class="intro-bottom">
-        <p class="intro-hint" id="introHint">Click the envelope to open</p>
-      </div>
-    </main>
+    <p class="footer-note">Zuzka &amp; Valerio · 19 September 2026</p>
   </div>
-  
 
   <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const trigger = document.getElementById("openEnvelope");
-        const body = document.body;
-        const homePreview = document.getElementById("homePreview");
+    // ============================================
+    // HESLO
+    const PASSWORD = "rimini2026";
+    // ============================================
 
-        const langButtons = document.querySelectorAll(".intro-lang-switch button");
-        const introKicker = document.getElementById("introKicker");
-        const introHint = document.getElementById("introHint");
+    const input = document.getElementById("pwInput");
+    const btn = document.getElementById("enterBtn");
+    const error = document.getElementById("errorMsg");
+    const eye = document.getElementById("toggleEye");
 
-        const introTranslations = {
-          en: {
-            kicker: "You have mail from",
-            hint: "Click the envelope to open"
-          },
-          sk: {
-            kicker: "Máte poštu od",
-            hint: "Kliknite na obálku pre otvorenie"
-          },
-          it: {
-            kicker: "Hai posta da",
-            hint: "Clicca sulla busta per aprirla"
-          }
-        };
+    // If already authenticated this session, go straight in
+    if (sessionStorage.getItem("zv_auth") === "1") {
+      window.location.href = "intro.html";
+    }
 
-        let opened = false;
-        let homeLoaded = false;
+    function tryEnter() {
+      if (input.value === PASSWORD) {
+        sessionStorage.setItem("zv_auth", "1");
+        window.location.href = "intro.html";
+      } else {
+        error.classList.add("visible");
+        input.value = "";
+        input.focus();
+        setTimeout(() => error.classList.remove("visible"), 3000);
+      }
+    }
 
-        function setIntroLanguage(lang) {
-          const t = introTranslations[lang];
-          if (!t) return;
+    btn.addEventListener("click", tryEnter);
+    input.addEventListener("keydown", e => { if (e.key === "Enter") tryEnter(); });
 
-          introKicker.textContent = t.kicker;
-          introHint.textContent = t.hint;
+    eye.addEventListener("click", () => {
+      const isPassword = input.type === "password";
+      input.type = isPassword ? "text" : "password";
+      eye.textContent = isPassword ? "🙈" : "👁";
+    });
 
-          langButtons.forEach((btn) => {
-            btn.classList.toggle("active", btn.dataset.lang === lang);
-          });
-        }
+    // Language switching
+    const t = {
+      en: {
+        kicker: "You are invited",
+        cardTitle: "Welcome",
+        cardText: "This page is private.<br>Please enter the password from your invitation.",
+        placeholder: "Password",
+        btn: "Enter",
+        error: "Incorrect password. Please try again.",
+        footer: "Zuzka & Valerio · 19 September 2026"
+      },
+      sk: {
+        kicker: "Ste pozvaní",
+        cardTitle: "Vitajte",
+        cardText: "Táto stránka je súkromná.<br>Zadajte heslo z vašej pozvánky.",
+        placeholder: "Heslo",
+        btn: "Vstúpiť",
+        error: "Nesprávne heslo. Skúste znova.",
+        footer: "Zuzka & Valerio · 19. septembra 2026"
+      },
+      it: {
+        kicker: "Siete invitati",
+        cardTitle: "Benvenuti",
+        cardText: "Questa pagina è privata.<br>Inserite la password dal vostro invito.",
+        placeholder: "Password",
+        btn: "Entra",
+        error: "Password errata. Riprova.",
+        footer: "Zuzka & Valerio · 19 settembre 2026"
+      }
+    };
 
-        langButtons.forEach((btn) => {
-          btn.addEventListener("click", () => {
-            const lang = btn.dataset.lang;
-            setIntroLanguage(lang);
-          });
-        });
-
-        setIntroLanguage("en");
-
-        if (homePreview) {
-          homePreview.addEventListener("load", () => {
-            homeLoaded = true;
-            body.classList.add("home-loaded");
-          });
-        } else {
-          homeLoaded = true;
-          body.classList.add("home-loaded");
-        }
-
-        if (!trigger) return;
-
-        trigger.addEventListener("click", () => {
-          if (opened || !homeLoaded) return;
-          opened = true;
-
-          body.classList.add("opening");
-
-          setTimeout(() => {
-            body.classList.add("opened");
-          }, 1700);
-        });
+    function applyLang(lang) {
+      const l = t[lang];
+      if (!l) return;
+      document.querySelector(".kicker").textContent = l.kicker;
+      document.querySelector(".card-title").textContent = l.cardTitle;
+      document.querySelector(".card-text").innerHTML = l.cardText;
+      document.getElementById("pwInput").placeholder = l.placeholder;
+      document.getElementById("enterBtn").textContent = l.btn;
+      document.getElementById("errorMsg").textContent = l.error;
+      document.querySelector(".footer-note").textContent = l.footer;
+      document.querySelectorAll(".lang-switch button").forEach(b => {
+        b.classList.toggle("active", b.dataset.lang === lang);
       });
-    </script>
+    }
+
+    document.querySelectorAll(".lang-switch button").forEach(b => {
+      b.addEventListener("click", () => applyLang(b.dataset.lang));
+    });
+
+    applyLang("en");
+  </script>
 </body>
 </html>
