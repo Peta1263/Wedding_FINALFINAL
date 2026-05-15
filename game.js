@@ -828,78 +828,323 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const prize = TEXTS[currentLang].prize;
 
+        function escapeHtml(value) {
+            return String(value)
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+        }
+
+        const safeName = escapeHtml(playerName || "");
+        const safeTitle = escapeHtml(prize.title);
+        const safeKicker = escapeHtml(prize.kicker);
+        const safeReward = escapeHtml(prize.reward);
+        const safeDestination = escapeHtml(prize.destination);
+        const safeFooter = escapeHtml(prize.footer);
+
         prizeWindow.document.write(`
             <!DOCTYPE html>
             <html lang="${prize.lang}">
             <head>
                 <meta charset="UTF-8">
-                <title>${prize.title}</title>
+                <title>${safeTitle}</title>
+
+                <link rel="preconnect" href="https://fonts.googleapis.com">
+                <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+                <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
                 <style>
+                    @page {
+                        size: A4 landscape;
+                        margin: 0;
+                    }
+
+                    * {
+                        box-sizing: border-box;
+                        -webkit-print-color-adjust: exact;
+                        print-color-adjust: exact;
+                    }
+
+                    html,
                     body {
                         margin: 0;
-                        min-height: 100vh;
+                        width: 100%;
+                        min-height: 100%;
+                        background: #f4f2ed;
+                        font-family: "Cormorant Garamond", Georgia, serif;
+                        color: #2f2f2f;
+                    }
+
+                    body {
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        background: #f7f3ee;
-                        font-family: Georgia, serif;
-                        color: #2f2f2f;
                     }
-                    .card {
-                        width: 850px;
-                        max-width: 92%;
-                        background: #fff;
-                        border: 1px solid #ddd2c7;
-                        border-radius: 28px;
-                        padding: 56px;
-                        box-shadow: 0 18px 40px rgba(0,0,0,0.08);
+
+                    .page {
+                        width: 297mm;
+                        height: 210mm;
+                        padding: 14mm;
+                        background:
+                            radial-gradient(circle at top left, rgba(127,151,136,0.12), transparent 34%),
+                            radial-gradient(circle at bottom right, rgba(127,151,136,0.10), transparent 34%),
+                            #f4f2ed;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        position: relative;
+                        overflow: hidden;
+                    }
+
+                    .corner {
+                        position: absolute;
+                        width: 72mm;
+                        height: 72mm;
+                        opacity: 0.34;
+                        pointer-events: none;
+                    }
+
+                    .corner-left {
+                        left: -17mm;
+                        top: -17mm;
+                        border-right: 1.5mm solid rgba(127,151,136,0.35);
+                        border-bottom: 1.5mm solid rgba(127,151,136,0.35);
+                        border-radius: 0 0 70mm 0;
+                    }
+
+                    .corner-right {
+                        right: -17mm;
+                        bottom: -17mm;
+                        border-left: 1.5mm solid rgba(127,151,136,0.35);
+                        border-top: 1.5mm solid rgba(127,151,136,0.35);
+                        border-radius: 70mm 0 0 0;
+                    }
+
+                    .certificate {
+                        width: 250mm;
+                        height: 160mm;
+                        background: rgba(255, 255, 255, 0.94);
+                        border: 1px solid #d9d0c7;
+                        border-radius: 9mm;
+                        padding: 13mm 17mm;
                         text-align: center;
+                        position: relative;
+                        box-shadow: 0 12mm 32mm rgba(61, 54, 48, 0.10);
+                        overflow: hidden;
                     }
+
+                    .certificate::before {
+                        content: "";
+                        position: absolute;
+                        inset: 6mm;
+                        border: 1px solid rgba(127,151,136,0.45);
+                        border-radius: 7mm;
+                        pointer-events: none;
+                    }
+
+                    .certificate::after {
+                        content: "";
+                        position: absolute;
+                        inset: 10mm;
+                        border: 1px dashed rgba(127,151,136,0.34);
+                        border-radius: 5mm;
+                        pointer-events: none;
+                    }
+
+                    .content {
+                        position: relative;
+                        z-index: 2;
+                        height: 100%;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                    }
+
+                    .monogram {
+                        font-family: "Great Vibes", cursive;
+                        font-size: 28px;
+                        color: #7f9788;
+                        margin-bottom: 4mm;
+                    }
+
                     .kicker {
-                        margin: 0 0 10px;
-                        letter-spacing: 0.16em;
+                        margin: 0 0 3mm;
+                        font-size: 13px;
+                        letter-spacing: 0.24em;
                         text-transform: uppercase;
-                        color: #8a827b;
-                        font-size: 14px;
-                    }
-                    h1 {
-                        margin: 0 0 18px;
-                        font-size: 52px;
-                        font-weight: 500;
-                    }
-                    .name {
-                        font-size: 38px;
-                        margin: 18px 0;
                         color: #7f9788;
                         font-weight: 700;
                     }
-                    .reward {
-                        font-size: 28px;
-                        margin: 20px 0 8px;
+
+                    h1 {
+                        margin: 0;
+                        font-size: 46px;
+                        line-height: 1.05;
+                        font-weight: 500;
+                        color: #2f2f2f;
                     }
-                    .meta {
-                        font-size: 22px;
-                        margin: 8px 0;
+
+                    .divider {
+                        width: 42mm;
+                        height: 1px;
+                        background: #d9d0c7;
+                        margin: 7mm auto 5mm;
+                        position: relative;
                     }
-                    .footer {
-                        margin-top: 30px;
+
+                    .divider::before {
+                        content: "✦";
+                        position: absolute;
+                        left: 50%;
+                        top: 50%;
+                        transform: translate(-50%, -50%);
+                        background: #fff;
+                        color: #7f9788;
+                        padding: 0 4mm;
+                        font-size: 14px;
+                    }
+
+                    .name {
+                        font-family: "Great Vibes", cursive;
+                        font-size: 56px;
+                        line-height: 1;
+                        color: #2f2f2f;
+                        margin: 0 0 5mm;
+                    }
+
+                    .reward-label {
+                        margin: 0 0 2mm;
+                        font-size: 13px;
+                        letter-spacing: 0.18em;
+                        text-transform: uppercase;
                         color: #8a827b;
-                        font-size: 20px;
+                        font-weight: 600;
+                    }
+
+                    .reward {
+                        margin: 0;
+                        font-size: 30px;
+                        line-height: 1.2;
+                        color: #7f9788;
+                        font-weight: 600;
+                    }
+
+                    .destination {
+                        margin: 4mm 0 0;
+                        font-size: 21px;
+                        color: #4b4b4b;
+                    }
+
+                    .bottom {
+                        width: 100%;
+                        margin-top: 10mm;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: end;
+                        gap: 12mm;
+                    }
+
+                    .small {
+                        flex: 1;
+                        font-size: 15px;
+                        color: #8a827b;
+                        text-align: left;
+                    }
+
+                    .signature {
+                        flex: 1;
+                        text-align: right;
+                        color: #8a827b;
+                        font-size: 15px;
+                    }
+
+                    .signature-name {
+                        font-family: "Great Vibes", cursive;
+                        font-size: 31px;
+                        color: #2f2f2f;
+                        margin-bottom: 1mm;
+                    }
+
+                    .print-button {
+                        position: fixed;
+                        right: 20px;
+                        bottom: 20px;
+                        border: none;
+                        border-radius: 999px;
+                        background: #7f9788;
+                        color: white;
+                        padding: 12px 22px;
+                        font-family: "Cormorant Garamond", Georgia, serif;
+                        font-size: 18px;
+                        cursor: pointer;
+                        box-shadow: 0 10px 24px rgba(0,0,0,0.18);
+                    }
+
+                    @media print {
+                        body {
+                            background: #f4f2ed;
+                        }
+
+                        .print-button {
+                            display: none;
+                        }
                     }
                 </style>
             </head>
+
             <body>
-                <div class="card">
-                    <p class="kicker">${prize.kicker}</p>
-                    <h1>${prize.title}</h1>
-                    <div class="name">${playerName}</div>
-                    <p class="reward">${prize.reward}</p>
-                    <p class="meta">${prize.destination}</p>
-                    <p class="footer">${prize.footer}</p>
+                <div class="page">
+                    <div class="corner corner-left"></div>
+                    <div class="corner corner-right"></div>
+
+                    <div class="certificate">
+                        <div class="content">
+                            <div class="monogram">Z &amp; V</div>
+
+                            <p class="kicker">${safeKicker}</p>
+                            <h1>${safeTitle}</h1>
+
+                            <div class="divider"></div>
+
+                            <div class="name">${safeName}</div>
+
+                            <p class="reward-label">Prize</p>
+                            <p class="reward">${safeReward}</p>
+                            <p class="destination">${safeDestination}</p>
+
+                            <div class="bottom">
+                                <div class="small">
+                                    ${safeFooter}<br>
+                                    19. 9. 2026 · Rimini
+                                </div>
+
+                                <div class="signature">
+                                    <div class="signature-name">Zuzka &amp; Valerio</div>
+                                    newlyweds
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <button class="print-button" onclick="window.print()">Print / Save PDF</button>
+
                 <script>
                     window.onload = function() {
-                        window.print();
+                        if (document.fonts && document.fonts.ready) {
+                            document.fonts.ready.then(function() {
+                                setTimeout(function() {
+                                    window.print();
+                                }, 300);
+                            });
+                        } else {
+                            setTimeout(function() {
+                                window.print();
+                            }, 500);
+                        }
                     };
                 <\/script>
             </body>
