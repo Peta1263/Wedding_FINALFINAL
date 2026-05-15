@@ -23,6 +23,7 @@ html {
 }
 
 body {
+  padding-top: 100px;
   margin: 0;
   font-family: "Cormorant Garamond", serif;
   color: var(--text);
@@ -49,8 +50,17 @@ a {
 }
 
 .container {
-  width: min(92%, var(--max-width));
+  width: min(75%, var(--max-width)); 
   margin: 0 auto;
+  position: relative;
+  z-index: 5; /* Aby text plával nad pozadím */
+  padding-left: 120px;
+  padding-right: 120px;
+}
+
+/* Pre istotu pridaj padding sekciám, aby text nikdy nenarazil na okraj kvetov */
+.section {
+  padding: 80px 10%; /* 10% z každej strany vytvorí bezpečný priestor */
 }
 
 @media (max-width: 768px) {
@@ -67,11 +77,31 @@ a {
 ========================= */
 
 .intro-page-body {
+  background-color: var(--bg) !important; /* Vynúti béžovú */
+  background-image: none !important;      /* ZRUŠÍ ten starý tmavý obrázok */
   margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+
+  /*margin: 0;
   min-height: 100vh;
   overflow: hidden;
   background: url("images/bg.png") center/cover no-repeat;
-  font-family: "Cormorant Garamond", serif;
+  font-family: "Cormorant Garamond", serif;*/
+}
+.intro-page-body .nav-flowers {
+  position: fixed; /* Aby ostali na mieste aj pri animácii */
+  z-index: 1;      /* Aby boli za obálkou, ale nad pozadím */
+  pointer-events: none;
+}
+.intro-content {
+  position: relative;
+  z-index: 2; /* Obálka bude nad kvetmi */
 }
 
 @media (max-width: 768px) {
@@ -205,6 +235,14 @@ a {
   padding: 40px 0 20px;
 }
 
+@media (max-width: 560px) {
+  .intro-wrap {
+    justify-content: space-between;
+    min-height: 100svh; /* use svh on mobile for correct height without browser chrome */
+    padding: 20px 0 100px;
+  }
+}
+
 .intro-top {
   display: flex;
   flex-direction: column;
@@ -267,6 +305,16 @@ a {
   display: flex;
   gap: 0.45rem;
   align-items: center;
+}
+
+@media (max-width: 560px) {
+  .intro-lang-switch {
+    top: auto;
+    bottom: 24px;
+    right: 50%;
+    transform: translateX(50%);
+    gap: 0.4rem;
+  }
 }
 
 .intro-lang-switch button {
@@ -537,15 +585,23 @@ a {
 ========================= */
 
 .topbar {
-  position: sticky;
+  position: fixed;       /* Toto "prilepí" bar na obrazovku */
   top: 0;
-  z-index: 50;
-  background: rgba(252, 251, 250, 0.92);
-  backdrop-filter: blur(8px);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-  overflow: visible;
+  left: 0;
+  width: 100%;
+  z-index: 1000;        /* Aby bol bar vždy nad ostatným obsahom */
+  background-color: var(--bg); /* Dôležité: aby pod barom nepresvital text pri scrollovaní */
+  transition: all 0.3s ease;
+  
+  /* Voliteľné: jemný tieň, aby sa bar oddelil od obsahu pri scrollovaní */
+  box-shadow: 0 2px 15px rgba(0,0,0,0.05); 
+  z-index: 1000;
+  padding: 1rem 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05); /* Jemná linka na oddelenie */
+  display: flex;
+  align-items: center;
+  min-height: 80px;
 }
-
 
 
 .nav-flowers {
@@ -554,7 +610,7 @@ a {
   width: 500px;
   height: 820px;
   pointer-events: none;
-  z-index: 100;
+  z-index: 1;
 }
 
 .nav-flowers-left {
@@ -658,10 +714,17 @@ a {
 
 .lang-switch {
   display: flex;
-  gap: 0.4rem;
-  align-items: center;
-  position: relative;
-  z-index: 60;
+  gap: 0.5rem;
+  /* Zväčši margin-right, aby sa tlačidlá posunuli ďalej od pravého kvetu */
+  margin-right: 80px; 
+  z-index: 1010; /* Uisti sa, že je nad kvetmi */
+}
+
+/* Ak máš mobilnú verziu, možno budeš musieť margin v media query upraviť na menej */
+@media (max-width: 768px) {
+  .lang-switch {
+    margin-right: 50px;
+  }
 }
 
 .lang-switch button {
@@ -1989,8 +2052,22 @@ a {
 
   .envelope-stage {
     width: 94vw;
-    height: 52vh;
-    min-height: 280px;
+    height: 46vh;
+    min-height: 240px;
+    margin-top: -30px;
+  }
+
+  .intro-wrap {
+    padding-top: 20px;
+    padding-bottom: 80px; /* space for bottom lang switch */
+  }
+
+  .intro-top {
+    margin-top: 20px;
+  }
+
+  .intro-bottom {
+    margin-top: 8px;
   }
 }
 
@@ -2019,11 +2096,6 @@ a {
 
   .game-progress-wrap {
     grid-template-columns: 1fr;
-  }
-
-  .intro-lang-switch {
-    top: 12px;
-    right: 12px;
   }
 
   .intro-kicker {
@@ -2129,15 +2201,39 @@ a {
     font-size: 17px;
   }
 
-  /* Nav */
+/* Nav */
   .nav-wrap {
     min-height: 64px;
+    padding: 0 4px;
+  }
+
+  /* Bigger touch targets for lang buttons */
+  .lang-switch button {
+    padding: 0.45rem 0.75rem;
+    min-height: 36px;
+  }
+
+  /* FAQ items easier to tap */
+  .faq-item summary {
+    padding: 0.5rem 0;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
   }
 }
 
 @media (max-width: 480px) {
   .section {
     padding: 44px 0;
+  }
+
+  .hero-card {
+    padding: 2rem 1rem;
+    border-radius: 14px;
+  }
+
+  .names {
+    font-size: clamp(3rem, 12vw, 4rem);
   }
 
   .date-row {
@@ -2206,4 +2302,270 @@ a {
 /* Fix road swipe hint always visible */
 .road-swipe-hint {
   display: block;
+}
+
+/* =========================================================
+   FINAL NAVBAR FIX
+   - kvety ostávajú veľké ako pôvodne
+   - upravený je iba text a rozloženie navigácie
+========================================================= */
+
+body {
+  padding-top: 100px;
+}
+
+.topbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  min-height: 92px;
+  padding: 0.75rem 0;
+  display: flex;
+  align-items: center;
+  background: rgba(244, 242, 237, 0.96);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* KVETY - pôvodná veľkosť a pôvodné rozloženie */
+.nav-flowers {
+  position: fixed;
+  top: 0;
+  width: 500px;
+  height: 820px;
+  pointer-events: none;
+  z-index: 1;
+  display: block;
+}
+
+.nav-flowers-left {
+  left: -100px;
+  top: -5px;
+}
+
+.nav-flowers-right {
+  right: -170px;
+  top: -5px;
+}
+
+.nav-flower-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top center;
+  display: block;
+  filter: drop-shadow(2px 6px 14px rgba(0, 0, 0, 0.15));
+}
+
+.flower-left img,
+.flower-right img {
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.08));
+}
+
+/* Navbar obsah */
+.nav-wrap {
+  width: min(72%, 1120px);
+  margin: 0 auto;
+  min-height: 70px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+  position: relative;
+  z-index: 1002;
+}
+
+.brand {
+  font-family: "Great Vibes", cursive;
+  font-size: 2.45rem;
+  line-height: 1;
+  color: var(--accent);
+  flex-shrink: 0;
+  margin-right: 0.2rem;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.45rem;
+  flex-wrap: nowrap;
+}
+
+.nav-link {
+  position: relative;
+  font-size: 1.16rem;
+  line-height: 1.12;
+  letter-spacing: 0.01em;
+  padding: 0.35rem 0 0.42rem;
+  color: var(--text);
+  white-space: nowrap;
+  text-align: center;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--text);
+  transform: translateX(-50%);
+  transition: width 0.25s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 100%;
+}
+
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 0.48rem;
+  flex-shrink: 0;
+  margin-right: 0;
+  position: relative;
+  z-index: 1003;
+}
+
+.lang-switch button {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 1px solid var(--line);
+  background: rgba(253, 252, 249, 0.78);
+  font-family: inherit;
+  font-size: 0.92rem;
+  cursor: pointer;
+  color: var(--text);
+  border-radius: 999px;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.lang-switch button:hover {
+  background: var(--card);
+}
+
+.lang-switch button:active {
+  transform: translateY(1px);
+}
+
+.lang-switch button.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.nav-toggle {
+  display: none;
+  border: none;
+  background: transparent;
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: var(--text);
+}
+
+/* menšie notebooky - kvety sa nemenia, iba sa jemne stiahne menu */
+@media (max-width: 1350px) {
+  .nav-wrap {
+    width: min(76%, 1040px);
+    gap: 1.35rem;
+  }
+
+  .nav {
+    gap: 1.1rem;
+  }
+
+  .nav-link {
+    font-size: 1.05rem;
+  }
+
+  .brand {
+    font-size: 2.2rem;
+  }
+
+  .lang-switch button {
+    width: 39px;
+    height: 39px;
+    font-size: 0.86rem;
+  }
+}
+
+/* mobil/tablet */
+@media (max-width: 900px) {
+  body {
+    padding-top: 78px;
+  }
+
+  .topbar {
+    min-height: 74px;
+    padding: 0.55rem 0;
+  }
+
+  .nav-wrap {
+    width: 92%;
+    min-height: 62px;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .brand {
+    font-size: 2rem;
+  }
+
+  .nav-toggle {
+    display: block;
+    position: relative;
+    z-index: 1004;
+  }
+
+  .nav {
+    position: absolute;
+    top: 74px;
+    left: 0;
+    right: 0;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    background: rgba(253, 252, 249, 0.98);
+    border-bottom: 1px solid var(--line);
+    padding: 1.3rem 1rem;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .nav-link {
+    font-size: 1.25rem;
+  }
+
+  .lang-switch {
+    gap: 0.35rem;
+    margin-right: 0;
+  }
+
+  .lang-switch button {
+    width: 38px;
+    height: 38px;
+    min-height: 38px;
+    padding: 0;
+    font-size: 0.86rem;
+  }
+
+  .nav-flowers {
+    display: none;
+  }
 }
