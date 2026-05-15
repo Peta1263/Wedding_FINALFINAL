@@ -12,8 +12,17 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="style.css" />
+  <!-- Preload critical above-the-fold images -->
+  <link rel="preload" href="images/envelope-close.png" as="image" fetchpriority="high" />
 </head>
 <body class="intro-page-body">
+  <div class="nav-flowers nav-flowers-left" aria-hidden="true">
+    <img src="images/flowers-left.png" class="nav-flower-img" alt="" loading="eager">
+  </div>
+  <div class="nav-flowers nav-flowers-right" aria-hidden="true">
+    <img src="images/flowers-right.png" class="nav-flower-img" alt="" loading="eager">
+  </div>
+
   <div class="intro-lang-switch">
     <button type="button" class="active" data-lang="en">EN</button>
     <button type="button" data-lang="sk">SK</button>
@@ -46,6 +55,8 @@
             alt=""
             class="env-img env-closed"
             id="envClosed"
+            fetchpriority="high"
+            decoding="sync"
           />
 
           <img
@@ -53,6 +64,8 @@
             alt=""
             class="env-img env-open"
             id="envOpen"
+            loading="lazy"
+            decoding="async"
           />
 
           <div class="env-letter" id="envLetter">
